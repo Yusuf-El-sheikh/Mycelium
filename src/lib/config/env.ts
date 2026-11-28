@@ -10,7 +10,12 @@ const schema = z.object({
 
   EMAIL: z.string().trim().toLowerCase(),
 
-  SECRET_TOKEN_KEY: z.string(),
+  SECRET_ACCESS_TOKEN_KEY: z.string(),
+  SECRET_REFRESH_TOKEN_KEY: z.string(),
+
+  ACCESS_TOKEN_EXPIRE_IN: z.coerce.number(),
+  REFRESH_TOKEN_EXPIRE_IN: z.coerce.number(),
+  OTP_TTL: z.coerce.number(),
 
   GOOGLE_CLIENT_ID: z.string(),
 
@@ -38,7 +43,14 @@ export const env = {
   },
 
   jwt: {
-    secret: parsed.SECRET_TOKEN_KEY,
+    accessSecret: parsed.SECRET_ACCESS_TOKEN_KEY,
+    refreshSecret: parsed.SECRET_REFRESH_TOKEN_KEY,
+  },
+
+  expiration: {
+    access: parsed.ACCESS_TOKEN_EXPIRE_IN,
+    refresh: parsed.REFRESH_TOKEN_EXPIRE_IN,
+    otpTtl: parsed.OTP_TTL,
   },
 
   google: {

@@ -11,7 +11,7 @@ export function guard(req: Request, res: Response, next: NextFunction): void {
       throw new AppError("Invalid action: No access token", 401);
     }
 
-    const payload = jwt.verify(token, env.jwt.secret);
+    const payload = jwt.verify(token, env.jwt.accessSecret);
 
     if (typeof payload === "string") {
       throw new AppError("Invalid action: Invalid access token", 401);
